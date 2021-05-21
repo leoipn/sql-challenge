@@ -5,22 +5,12 @@ DROP TABLE IF EXISTS employees;
 DROP TABLE IF EXISTS salaries;
 DROP TABLE IF EXISTS titles;
 
-CREATE TABLE departments (
-    dept_no VARCHAR(4)   NOT NULL,
-    dept_name VARCHAR(50)   NOT NULL,
-    CONSTRAINT pk_departments PRIMARY KEY (
-        dept_no
+CREATE TABLE titles (
+    title_id VARCHAR(5)   NOT NULL,
+    title VARCHAR(50)   NOT NULL,
+    CONSTRAINT pk_titles PRIMARY KEY (
+        title_id
      )
-);
-
-CREATE TABLE dept_emp (
-    emp_no VARCHAR(10)   NOT NULL,
-    dept_no VARCHAR(4)   NOT NULL
-);
-
-CREATE TABLE dept_manager (
-    dept_no VARCHAR(4)   NOT NULL,
-    emp_no VARCHAR(10)   NOT NULL
 );
 
 CREATE TABLE employees (
@@ -41,14 +31,27 @@ CREATE TABLE salaries (
     salary INTEGER   NOT NULL
 );
 
-CREATE TABLE titles (
-    title_id VARCHAR(5)   NOT NULL,
-    title VARCHAR(50)   NOT NULL,
-    CONSTRAINT pk_titles PRIMARY KEY (
-        title_id
+CREATE TABLE departments (
+    dept_no VARCHAR(4)   NOT NULL,
+    dept_name VARCHAR(50)   NOT NULL,
+    CONSTRAINT pk_departments PRIMARY KEY (
+        dept_no
      )
 );
 
+CREATE TABLE dept_emp (
+    emp_no VARCHAR(10)   NOT NULL,
+    dept_no VARCHAR(4)   NOT NULL
+);
+
+CREATE TABLE dept_manager (
+    dept_no VARCHAR(4)   NOT NULL,
+    emp_no VARCHAR(10)   NOT NULL
+);
+
+/************************************************************************
+			FOREIGN KEYS DEFINITION
+*************************************************************************/
 ALTER TABLE dept_emp ADD CONSTRAINT fk_dept_emp_emp_no FOREIGN KEY(emp_no)
 REFERENCES employees (emp_no);
 
@@ -67,8 +70,12 @@ REFERENCES titles (title_id);
 ALTER TABLE salaries ADD CONSTRAINT fk_salaries_emp_no FOREIGN KEY(emp_no)
 REFERENCES employees (emp_no);
 
-/***********************/
-SELECT * FROM TITLES
-SELECT * FROM EMPLOYEES
-SELECT * FROM SALARIES
-SELECT * FROM DEPARTMENTS
+/************************************************************************
+			SELECTS TO VERIFY THE DATA IMPORTED
+*************************************************************************/
+SELECT * FROM TITLES;
+SELECT * FROM EMPLOYEES;
+SELECT * FROM SALARIES;
+SELECT * FROM DEPARTMENTS;
+SELECT * FROM DEPT_EMP;
+SELECT * FROM DEPT_MANAGER;
