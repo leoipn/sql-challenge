@@ -99,10 +99,44 @@ WHERE
 		MAN.DEPT_NO = DEP.DEPT_NO AND
 		DEP.DEPT_NAME = 'Sales'
 
-/****************************************
+/***********************************************************
   7. Employees in the Sales and Development departments.
-****************************************/
-/****************************************
+************************************************************/
+SELECT 	EMP.EMP_NO AS "Employee number",
+		EMP.LAST_NAME AS "Last name",
+		EMP.FIRST_NAME AS "First name",
+		DEP.DEPT_NAME AS "Department name"
+FROM 	
+		EMPLOYEES EMP,
+		DEPT_EMP DEMP,
+		DEPARTMENTS DEP
+WHERE
+		EMP.EMP_NO   = DEMP.EMP_NO AND
+		DEMP.DEPT_NO = DEP.DEPT_NO AND
+		DEP.DEPT_NAME IN ('Sales','Development')
+
+UNION ALL
+
+SELECT 	EMP.EMP_NO AS "Employee number",
+		EMP.LAST_NAME AS "Last name",
+		EMP.FIRST_NAME AS "First name",
+		DEP.DEPT_NAME AS "Department name"
+FROM 	
+		EMPLOYEES EMP,
+		DEPT_MANAGER MAN,
+		DEPARTMENTS DEP
+WHERE
+		EMP.EMP_NO   = MAN.EMP_NO AND
+		MAN.DEPT_NO = DEP.DEPT_NO AND
+		DEP.DEPT_NAME IN ('Sales','Development');
+
+/*********************************************
   8. Frequency count of employee last names.
-****************************************/
+**********************************************/
+SELECT	EMP.LAST_NAME AS "Last name",
+		COUNT(LAST_NAME) AS "Total"
+FROM
+		EMPLOYEES EMP
+GROUP BY EMP.LAST_NAME
+ORDER BY "Total" DESC
 		
