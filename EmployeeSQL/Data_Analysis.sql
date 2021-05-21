@@ -54,19 +54,51 @@ FROM
 		EMPLOYEES EMP
 WHERE
 		DEMP.DEPT_NO = DEP.DEPT_NO AND
-		DEMP.EMP_NO  = EMP.EMP_NO
+		DEMP.EMP_NO  = EMP.EMP_NO;
 
 /******************************************************************************
   5. Employees whose first name is "Hercules" and last names begin with "B."
 *******************************************************************************/
-List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
 SELECT 	EMP.FIRST_NAME AS "First name",
 		EMP.LAST_NAME AS "Last name",
 		EMP.SEX AS "SEX"
-		
+FROM 	
+		EMPLOYEES EMP
+WHERE
+		EMP.FIRST_NAME = 'Hercules' AND
+		EMP.LAST_NAME LIKE 'B%'
+
 /****************************************
-  6. Employees in the Sales department.
+  6. All employees in the Sales department.
 ****************************************/
+SELECT 	EMP.EMP_NO AS "Employee number",
+		EMP.LAST_NAME AS "Last name",
+		EMP.FIRST_NAME AS "First name",
+		DEP.DEPT_NAME AS "Department name"
+FROM 	
+		EMPLOYEES EMP,
+		DEPT_EMP DEMP,
+		DEPARTMENTS DEP
+WHERE
+		EMP.EMP_NO   = DEMP.EMP_NO AND
+		DEMP.DEPT_NO = DEP.DEPT_NO AND
+		DEP.DEPT_NAME = 'Sales'
+
+UNION ALL
+
+SELECT 	EMP.EMP_NO AS "Employee number",
+		EMP.LAST_NAME AS "Last name",
+		EMP.FIRST_NAME AS "First name",
+		DEP.DEPT_NAME AS "Department name"
+FROM 	
+		EMPLOYEES EMP,
+		DEPT_MANAGER MAN,
+		DEPARTMENTS DEP
+WHERE
+		EMP.EMP_NO   = MAN.EMP_NO AND
+		MAN.DEPT_NO = DEP.DEPT_NO AND
+		DEP.DEPT_NAME = 'Sales'
+
 /****************************************
   7. Employees in the Sales and Development departments.
 ****************************************/
