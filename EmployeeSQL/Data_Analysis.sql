@@ -37,7 +37,40 @@ FROM
 		DEPT_MANAGER MAN,
 		DEPARTMENTS DEP,
 		EMPLOYEES EMP
-		
 WHERE
 		MAN.DEPT_NO = DEP.DEPT_NO AND
 		MAN.EMP_NO  = EMP.EMP_NO
+
+/****************************************
+  4. Deparment of each employee.
+****************************************/
+SELECT 	DEMP.EMP_NO AS "Employee Number",
+		EMP.LAST_NAME AS "Last name",
+		EMP.FIRST_NAME AS "First name",
+		DEP.DEPT_NAME AS "Department Name"		
+FROM 
+		DEPT_EMP DEMP,
+		DEPARTMENTS DEP,
+		EMPLOYEES EMP
+WHERE
+		DEMP.DEPT_NO = DEP.DEPT_NO AND
+		DEMP.EMP_NO  = EMP.EMP_NO
+
+/******************************************************************************
+  5. Employees whose first name is "Hercules" and last names begin with "B."
+*******************************************************************************/
+List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
+SELECT 	EMP.FIRST_NAME AS "First name",
+		EMP.LAST_NAME AS "Last name",
+		EMP.SEX AS "SEX"
+		
+/****************************************
+  6. Employees in the Sales department.
+****************************************/
+/****************************************
+  7. Employees in the Sales and Development departments.
+****************************************/
+/****************************************
+  8. Frequency count of employee last names.
+****************************************/
+		
